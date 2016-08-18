@@ -8,10 +8,15 @@
 #include <assert.h>
 #include <vector>
 
+#ifdef SUNXI
+using namespace std;
+#include "libSunxi.h"
+#endif
+
 bool verbose = false;
 bool ftdi_verbose = false;
 
-#ifndef USBMODE
+#ifdef RASPI
 
 #  include <wiringPi.h>
 
@@ -41,7 +46,9 @@ void digitalSync(int usec_delay)
 	usleep(usec_delay);
 }
 
-#else
+#endif
+
+#ifdef USBMOD
 
 #  include <ftdi.h>
 
